@@ -63,7 +63,54 @@ The second part represents the steps coming with FL training and they are a simp
 To sum up, these steps were proposed in [6] and we follow them as an easy and straightforward solution.  
 
 ### 1.2 Networks 
+**ResUNet** presents the modification of the well-known segmentation network Unet (encoder-decoder type architecture, as illustrated in Figure 2 (a) replacing the convolution layers in each block with residual units (Figure 2 (b)). It has been demonstrated that the residual unit enhances network depth diversity, resulting in enhanced performance over the conventional convolution layer [7].
 
+<p align="center">
+  <img width="360" height="250" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/resunet.png">
+</p>
+
+<p align="center">
+Figure 2 – Modifications of the classical Unet model [7]
+</p>
+
+In global, the whole architecture is presented in Figure 3.
+<p align="center">
+  <img width="360" height="400" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/resunet1.jpg">
+</p>
+
+<p align="center">
+Figure 3 – ResUNet: schematic visualization of the network architecture 
+</p>
+
+**Attention Unet** is the conventional U-Net architecture incorporating the additive attention gate (AG) to draw attention to important features passed over skip connections [8].
+<p align="center">
+  <img width="760" height="300" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/attention.png">
+</p>
+
+<p align="center">
+Figure 4 – Attention Unet: schematic visualization of the network architecture [8]
+</p>
+
+**SegResnet** with an encoder to extract image characteristics and a decoder to reconstruct the segmentation mask, this model uses a CNN architecture based on an encoder-decoder pipeline. The created model, with the exception of the variational autoencoder (VAE) is presented in Myronenko, Andriy. (2019) [9]: 
+<p align="center">
+  <img width="500" height="250" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/segres.png">
+</p>
+
+<p align="center">
+Figure 5 – SegResNet: schematic visualization of the network architecture 
+</p>
+
+#### Training Procedure
+
+In general, the same augmentation and pre-processing steps as well as hyperparameters proposed are applied as in [4]. The only changes are related to the total number of global rounds (reduced to 100). This decision allows us to reduce the total time of experiments while obtaining optimal segmentation accuracy.  
+
+The following augmentation techniques were applied on the fly during training: random cropping of fixed sized 4 regions (224 x  224 x 32) with 1 to 1 ratio choosing foreground/background pixels, random flips along each axis, random intensity scaling and shifting.
+
+Due to the patch-based nature of our training, all inference is done patch-based as well. In particular, a sliding window is chosen with the size of 224 x  224 x 32 and overlapping of 0.25. 
+
+The accuracy segmentation metric is average Dice score, the SGD optimizer with learning rate of 1e-2  and momentum=0.9 is used for all experiments. The number of global rounds is set to 100 while the local epochs equal 10.   
+
+### 1.3 Federated Learning: Algorithms 
 
 ### References
 
@@ -73,3 +120,10 @@ To sum up, these steps were proposed in [6] and we follow them as an easy and st
     4. Simpson, A.L., Antonelli, M., Bakas, S., Bilello, M., Farahani, K., Ginneken, B.V., Kopp-Schneider, A., Landman, B.A., Litjens, G.J., Menze, B.H., Ronneberger, O., Summers, R.M., Bilic, P., Christ, P.F., Do, R.K., Gollub, M.J., Golia-Pernicka, J., Heckers, S., Jarnagin, W.R., McHugo, M., Napel, S., Vorontsov, E., Maier-Hein, L., & Cardoso, M.J. (2019). A large annotated medical image dataset for the development and evaluation of segmentation algorithms.
     5. Bloch N, Madabhushi A, Huisman H, Freymann J, Kirby J, Grauer M, Enquobahrie A, Jaffe C, Clarke L, Farahani K. (2015). NCI-ISBI 2013 Challenge: Automated Segmentation of Prostate Structures. 
     6. NVFlare GitHub. Available at: https://github.com/NVIDIA/NVFlare/tree/dev/examples (Accessed: 20.12.2022).
+    7. Xue W, Li J, Hu Z, Kerfoot E, Clough J, Oksuz I, Xu H, Grau V, Guo F, Ng M, Li X, Li Q, Liu L, Ma J, Grinias E, Tziritas G, Yan W, Atehortua A, Garreau M, Jang Y, Debus A, Ferrante E, Yang G, Hua T, Li S. Left Ventricle Quantification Challenge: A Comprehensive Comparison and Evaluation of Segmentation and Regression for Mid-Ventricular Short-Axis Cardiac MR Data. IEEE J Biomed Health Inform. 2021 Sep;25(9):3541-3553. doi: 10.1109/JBHI.2021.3064353. Epub 2021 Sep 3. PMID: 33684050; PMCID: PMC7611810.
+    8. Oktay, Ozan & Schlemper, Jo & Folgoc, Loic & Lee, Matthew & Heinrich, Mattias & Misawa, Kazunari & Mori, Kensaku & McDonagh, Steven & Hammerla, Nils & Kainz, Bernhard & Glocker, Ben & Rueckert, Daniel. (2018). Attention U-Net: Learning Where to Look for the Pancreas. 
+    9. Myronenko, Andriy. (2019). 3D MRI Brain Tumor Segmentation Using Autoencoder Regularization: 4th International Workshop, BrainLes 2018, Held in Conjunction with MICCAI 2018, Granada, Spain, September 16, 2018, Revised Selected Papers, Part II. 10.1007/978-3-030-11726-9_28. 
+    10. McMahan, H. B., Eider Moore, Daniel Ramage, Seth Hampson and Blaise Agüera y Arcas. “Communication-Efficient Learning of Deep Networks from Decentralized Data.” International Conference on Artificial Intelligence and Statistics (2017).
+    11. Sahu, Anit Kumar, Tian Li, Maziar Sanjabi, Manzil Zaheer, Ameet S. Talwalkar and Virginia Smith. “Federated Optimization in Heterogeneous Networks.” arXiv: Learning (2020): n. pag.
+    12. Li, Tian, Shengyuan Hu, Ahmad Beirami and Virginia Smith. “Ditto: Fair and Robust Federated Learning Through Personalization.” International Conference on Machine Learning (2021).
+    13. NVFlare Developer. Available at: https://developer.nvidia.com/flare (Accessed: 20.12.2022).
