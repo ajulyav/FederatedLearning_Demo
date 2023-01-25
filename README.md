@@ -148,12 +148,23 @@ Figure 8 – Ditto algorithm [12]
 NVIDIA FLARE [13] is selected to be the framework as it is a domain-agnostic, open-source, and extensible SDK for Federated Learning. It enables developers to create a secure, privacy-preserving solution for a distributed multi-party cooperation and helps academics and data scientists to adapt current ML/DL workflow to a federated paradigm.
 
 With its componentized design, NVIDIA FLARE's federated learning workloads may be easily moved from research and simulation to actual production deployment. Some essential elements include:
-    • FL Simulator for rapid development and prototyping (new in v2.2)
-    • FLARE Dashboard for simplified project management and deployment (new in v2.2)
-    • Reference FL algorithms (e.g., FedAvg, FedProx) and workflows (e.g., Scatter and Gather, Cyclic)
-    • Privacy preservation with differential privacy, homomorphic encryption, and more
-    • Management tools for secure provisioning and deployment, orchestration, and management
-    • Specification-based API for extensibility
+
+- FL Simulator for rapid development and prototyping (new in v2.2)
+- FLARE Dashboard for simplified project management and deployment (new in v2.2)
+- Reference FL algorithms (e.g., FedAvg, FedProx) and workflows (e.g., Scatter and Gather, Cyclic)
+- Privacy preservation with differential privacy, homomorphic encryption, and more
+- Management tools for secure provisioning and deployment, orchestration, and management
+-Specification-based API for extensibility
+    
+<p align="center">
+  <img width="680" height="350" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/flare.png">
+</p>
+
+<p align="center">
+Figure 11 – NVIDIA FLARE key features
+</p>
+
+As at the date of starting of the experiments, there were two available versions 2.0 and 2.1. To continue experiments, NVIDIA FLARE 2.0 was chosen as the simple scenario where there is one experiment per time and a single server-aggregator. This setup is fully supported by 2.0 and removes the need for using NVIDIA FLARE 2.1 which mainly provides the updates of: High Availability (i.e. support of multiple FL servers with automatic cut-over) and Multi-Job Execution (i.e. run of multiple experiments in parallel).
 
 ### References
 
