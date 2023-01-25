@@ -42,6 +42,29 @@ Among them:
 
 The following table illustrates how the three sites differ in appearance:
 
+Table 2 – Differences in appearance 
+
+|   | I2CVB [1] - X  | MSD [2] - Y  |  NCI-ISBI [3] - Z |
+| ------------ | ------------ | ------------ | ------------ |
+| Sample 1  |  ![](https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/sampl1_1.png?raw=true)|  ![](https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/sampl1_2.png?raw=true) | ![](https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/sampl1_3.png?raw=true)  |
+| Sample 2 | ![](https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/sampl2_1.png?raw=true)  |  ![](https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/sampl2_2.png?raw=true) |  ![](https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/sampl2_3.png?raw=true) |
+| Sample 3 |  ![](https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/sampl3_1.png?raw=true) | ![](https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/sampl3_2.png?raw=true)  | ![](https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/sampl3_3.png?raw=true)  |
+
+##### Preparation and preprocessing pipeline: 
+The general pipeline is presented in Figure 1. As it can be seen, it consists of two parts: data preparation and pre-processing. In the first part, each client downloads the dataset from the source, cleans (in order to delete problematic cases i.e. missing slice, image/label mismatch), and performs thresholding to combine the two label values to get the mask of the prostate. As an optional step, it requires channel selection to take T2w for the MSD dataset.
+
+![](https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/pipeline.png?raw=true)
+The second part represents the steps coming with FL training and they are a simple normalization pipeline: 
+
+    1) Voxel normalization to 0.3x0.3x1.0.
+    2) Changing the input image’s orientation into the “RAS” axcodes.
+    3) Z-score intensity normalization.
+
+To sum up, these steps were proposed in [6] and we follow them as an easy and straightforward solution.  
+
+### 1.2 Networks 
+
+
 ### References
 
     1. Ferlay J, Soerjomataram I, Dikshit R, Eser S, Mathers C, Rebelo M, Parkin DM, Forman D, Bray F. 2015. Cancer incidence and mortality worldwide: Sources, methods and major patterns in GLOBOCAN 2012. Int J Cancer 136: E359–E386.
@@ -49,3 +72,4 @@ The following table illustrates how the three sites differ in appearance:
     3. G. Lemaitre, R. Marti, J. Freixenet, J. C. Vilanova, P. M. Walker, and F. Meriaudeau, "Computer-Aided Detection and Diagnosis for prostate cancer based on mono and multi-parametric MRI: A Review", Computer in Biology and Medicine, vol. 60, pp 8 - 31, 2015
     4. Simpson, A.L., Antonelli, M., Bakas, S., Bilello, M., Farahani, K., Ginneken, B.V., Kopp-Schneider, A., Landman, B.A., Litjens, G.J., Menze, B.H., Ronneberger, O., Summers, R.M., Bilic, P., Christ, P.F., Do, R.K., Gollub, M.J., Golia-Pernicka, J., Heckers, S., Jarnagin, W.R., McHugo, M., Napel, S., Vorontsov, E., Maier-Hein, L., & Cardoso, M.J. (2019). A large annotated medical image dataset for the development and evaluation of segmentation algorithms.
     5. Bloch N, Madabhushi A, Huisman H, Freymann J, Kirby J, Grauer M, Enquobahrie A, Jaffe C, Clarke L, Farahani K. (2015). NCI-ISBI 2013 Challenge: Automated Segmentation of Prostate Structures. 
+    6. NVFlare GitHub. Available at: https://github.com/NVIDIA/NVFlare/tree/dev/examples (Accessed: 20.12.2022).
