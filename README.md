@@ -110,7 +110,50 @@ Due to the patch-based nature of our training, all inference is done patch-based
 
 The accuracy segmentation metric is average Dice score, the SGD optimizer with learning rate of 1e-2  and momentum=0.9 is used for all experiments. The number of global rounds is set to 100 while the local epochs equal 10.   
 
-### 1.3 Federated Learning: Algorithms 
+### 1.3 Federated Learning: Algorithms
+The following aggregation algorithms are tested in the framework of Demonstrator 1: 
+
+    • Algorithm 1: FedAvg – the Federated Averaging (FedAvg) algorithm, which consists of alternating between a few local stochastic gradient updates at client nodes, followed by a model averaging update at the server, is perhaps the most commonly used method in Federated Learning [10]. 
+<p align="center">
+  <img width="380" height="250" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/algo1.png">
+</p>
+
+<p align="center">
+Figure 6 – FedAvg algorithm [11]
+</p>
+
+Algorithm 2: FedProx is a generalization of FedAvg with some modifications to address heterogeneity of data and systems. Differently from FedAvg, here the clients optimize a regularized loss with a proximal term. (Note: FedAvg is a particular case of FedProx with μ=0.) [11]. 
+
+<p align="center">
+  <img width="380" height="250" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/algo2.png">
+</p>
+
+<p align="center">
+Figure 7 – FedProx algorithm [11]
+</p>
+
+Algorithm 3: Ditto fundamentally differs from FedProx in that the goal is to learn personalized models vk, while FedProx produces a single global model w. For instance, when the regularization hyper-parameter is zero, Ditto reduces to learning separate local models, whereas FedProx would reduce to FedAvg [12].
+
+<p align="center">
+  <img width="380" height="350" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/algo3.png">
+</p>
+
+<p align="center">
+Figure 8 – Ditto algorithm [12]
+</p>
+
+### 2. Infrastructure: Confidential part
+
+### 3. Framework
+NVIDIA FLARE [13] is selected to be the framework as it is a domain-agnostic, open-source, and extensible SDK for Federated Learning. It enables developers to create a secure, privacy-preserving solution for a distributed multi-party cooperation and helps academics and data scientists to adapt current ML/DL workflow to a federated paradigm.
+
+With its componentized design, NVIDIA FLARE's federated learning workloads may be easily moved from research and simulation to actual production deployment. Some essential elements include:
+    • FL Simulator for rapid development and prototyping (new in v2.2)
+    • FLARE Dashboard for simplified project management and deployment (new in v2.2)
+    • Reference FL algorithms (e.g., FedAvg, FedProx) and workflows (e.g., Scatter and Gather, Cyclic)
+    • Privacy preservation with differential privacy, homomorphic encryption, and more
+    • Management tools for secure provisioning and deployment, orchestration, and management
+    • Specification-based API for extensibility
 
 ### References
 
