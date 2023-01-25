@@ -166,6 +166,37 @@ Figure 11 – NVIDIA FLARE key features
 
 As at the date of starting of the experiments, there were two available versions 2.0 and 2.1. To continue experiments, NVIDIA FLARE 2.0 was chosen as the simple scenario where there is one experiment per time and a single server-aggregator. This setup is fully supported by 2.0 and removes the need for using NVIDIA FLARE 2.1 which mainly provides the updates of: High Availability (i.e. support of multiple FL servers with automatic cut-over) and Multi-Job Execution (i.e. run of multiple experiments in parallel).
 
+### 4. Experiments 
+As mentioned before, since the purpose of the demonstrator is to test the feasibility of the Partners to run FL workflows remotely the FL workflows (experiments), the main focus is on baseline experiments:
+
+• Test FL average techniques during training.
+
+• Measure segmentation accuracy.
+
+• Evaluate training time.
+
+• Compare FL pipelines against local training.
+
+
+Thus, Table 3 presents the setup plan of all experiments being conducted for Demonstrator 1. 
+
+Table 3 – Experiment plan of Demonstrator 1
+<p align="center">
+  <img width="580" height="450" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/table.png">
+</p>
+
+These experiments allow us pursue the following goals:
+
+<p align="center">
+  <img width="580" height="90" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/table1.png">
+</p>
+• Run 1, Run 2 and Run 3 (Goal 1) are implemented for the comparisons of hardware variations in the federation. As the well-known critical aspect for efficient training DL algorithms is the availability of high-performing resources, the goal is to see the effect of CPU/GPU client setups on the total execution time. 
+
+• Though Run 3, Run 4 and Run 5 (Goal 2) are for analyzing Federated Learning and Deep Learning results, in particular, analysis of different aggregation schemes and CNN models and the overall accuracy under multi-centric data with different variations. 
+
+• Finally, to evaluate the value of Federated Learning vs classical local training (Goal 3), the FL global models and training performed only in one center with cross-validation are compared. 
+
+
 ### References
 
     1. Ferlay J, Soerjomataram I, Dikshit R, Eser S, Mathers C, Rebelo M, Parkin DM, Forman D, Bray F. 2015. Cancer incidence and mortality worldwide: Sources, methods and major patterns in GLOBOCAN 2012. Int J Cancer 136: E359–E386.
