@@ -197,6 +197,23 @@ These experiments allow us pursue the following goals:
 • Finally, to evaluate the value of Federated Learning vs classical local training (Goal 3), the FL global models and training performed only in one center with cross-validation are compared. 
 
 
+### 5. Results
+
+#### 5.1 Time efficiency and Workload
+Table 5 – Average total time spent on training and validation
+<p align="center">
+  <img width="580" height="160" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/table3.png">
+</p>
+
+Briefly analyzing the results on the basis of Table 5, it can be highlighted the obvious observation that the experiment with CPU clients took the most time, while the second place in terms of total time goes to Run 2, and the fastest one is when all clients have GPUs. Even though not using the most powerful GPU, the boost is around 32.14% with respect to Run 1. This leads to the fact that in order to conduct large-scale experiments on rather larger datasets, it is critical to run experiments on powerful GPUs on each client.
+
+Moreover, this idea is clearly supported when referring to Table 6. As we can see, the “worst player” (a client with slow hardware) pulls down the rest of the clients. For example, client A can complete the round as quickly as possible, but the waiting time (delay) will be significantly large until the worst client C submits their results. This can be corrected by the logic of the experiment, i.e. accepting the results from at least one client in order to move on to the next round, but this could reduce only the waiting time, but not the training time. In addition, it can degrade the performance of the algorithm.
+
+Table 6 – Average round time per client and waiting time (delay)
+<p align="center">
+  <img width="580" height="440" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/table4.png">
+</p>
+
 ### References
 
     1. Ferlay J, Soerjomataram I, Dikshit R, Eser S, Mathers C, Rebelo M, Parkin DM, Forman D, Bray F. 2015. Cancer incidence and mortality worldwide: Sources, methods and major patterns in GLOBOCAN 2012. Int J Cancer 136: E359–E386.
