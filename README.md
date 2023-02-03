@@ -214,6 +214,41 @@ Table 6 – Average round time per client and waiting time (delay)
   <img width="580" height="440" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/table4.png">
 </p>
 
+
+#### 5.2 Federated Learning and Segmentation Performance 
+
+The validation scores of the global model for FedAvg and FedProx algorithms, and personalized models for Ditto are compared. In this example, the global FL model computes the validation score using the combined validation set, while each client computes their own validation scores using their own validation sets.
+
+Under conditions of limited training, the first results are optimistic as shown in Table 7, in particular, the best average Dice score is 0.609. When analyzing it per client, then it can be seen even higher values (with the exception of the X client). This may be due to the complexity of the dataset, because it consists of two parts, which can be a main problem.
+
+In short, it can be concluded that the best aggregation algorithm is FedAvg, although Ditto is also worth taking into account. Algorithm FedProx, on the other hand, did surprisingly worse, even though its idea is aimed at tackling heterogeneity in federated networks. However, working with algorithm parameters could potentially make a change.
+<p align="center">
+  <img width="580" height="640" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/table5.png">
+</p>
+
+#### 5.3 Local (Cross-validation) vs FL Training vs Central
+
+This part presents the performance of the best FL model and the best models for each client when training only on a portion of each client's dataset. Additionally, there is the analysis of FL  and Central results. As it can be noticed, FL results compared to the cross-validation approach look promising. However, there is some room for improvement. The key factors affecting the performance could be:
+
+- Insufficient number of training rounds, since FL algorithm may require more time for its convergence.
+- Assuming, on the basis of the results, that I2CVB could be the client that degrades the overall results, it is necessary to pay more attention to the harmonization and data preprocessing in the FL setup.
+
+<p align="center">
+  <img width="580" height="500" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/table6.png">
+</p>
+
+<p align="center">
+  <img width="580" height="500" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/table7.png">
+</p>
+
+<p align="center">
+  <img width="580" height="500" src="https://github.com/ajulyav/FederatedLearning_Demo/blob/main/imgs/table8.png">
+</p>
+
+### Conclusion
+This Demonstrator indeed shows the promise of developing a Federated Platform for training and validating Deep Learning models while avoiding many issues related to data ownership, privacy, and legality. Also, this allows clients (medical centers, institutions and hospitals) to get more generalized models.
+
+
 ### References
 
     1. Ferlay J, Soerjomataram I, Dikshit R, Eser S, Mathers C, Rebelo M, Parkin DM, Forman D, Bray F. 2015. Cancer incidence and mortality worldwide: Sources, methods and major patterns in GLOBOCAN 2012. Int J Cancer 136: E359–E386.
